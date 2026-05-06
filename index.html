@@ -1,6 +1,772 @@
-<html>
-<Title>Astha Kohli PortFolio</Title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astha Kohli — Interior Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #f7f3ee;
+      --beige:   #ede6da;
+      --sand:    #d4c4a8;
+      --terr:    #b07d5b;
+      --brown:   #7a4f35;
+      --charcoal:#2c2c2c;
+      --dark:    #1a1a1a;
+      --white:   #ffffff;
+      --gold:    #c9a96e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 6%;
+      background: rgba(247,243,238,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--sand);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.08); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; letter-spacing: .05em;
+      color: var(--dark); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: .82rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--charcoal); font-weight: 500;
+      position: relative; padding-bottom: 3px;
+      transition: color .3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1.5px; background: var(--terr); transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--terr); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--charcoal); transition: .3s; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      padding: 8rem 6% 4rem;
+      background: linear-gradient(135deg, var(--cream) 55%, var(--beige) 100%);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, var(--sand) 0%, transparent 70%);
+      opacity: .45;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block; font-size: .72rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--terr); font-weight: 600;
+      background: rgba(176,125,91,.1); padding: .35rem 1rem; border-radius: 50px;
+      margin-bottom: 1.4rem;
+    }
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--dark); margin-bottom: 1.6rem;
+    }
+    .hero-text h1 em { font-style: italic; color: var(--terr); }
+    .hero-text p {
+      font-size: .97rem; line-height: 1.85; color: #555;
+      max-width: 480px; margin-bottom: 2.4rem;
+    }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      text-decoration: none; padding: .85rem 2.2rem;
+      font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
+      font-weight: 600; border-radius: 50px; transition: all .3s; cursor: pointer;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--terr); color: var(--white);
+      border: 2px solid var(--terr);
+    }
+    .btn-primary:hover { background: var(--brown); border-color: var(--brown); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(176,125,91,.35); }
+    .btn-outline {
+      background: transparent; color: var(--terr);
+      border: 2px solid var(--terr);
+    }
+    .btn-outline:hover { background: var(--terr); color: var(--white); transform: translateY(-2px); }
+
+    .hero-image {
+      display: flex; justify-content: center; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .photo-frame {
+      width: clamp(260px, 30vw, 400px);
+      height: clamp(320px, 38vw, 490px);
+      border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+      overflow: hidden;
+      border: 6px solid var(--sand);
+      box-shadow: 0 30px 80px rgba(0,0,0,.15);
+      background: var(--beige);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--sand); font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; letter-spacing: .1em; text-align: center; padding: 2rem;
+    }
+    .photo-placeholder svg { margin-bottom: 1rem; opacity: .5; }
+
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sand);
+    }
+    .scroll-line {
+      width: 1px; height: 50px; background: linear-gradient(to bottom, var(--sand), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:.4; transform:scaleY(1)} 50%{opacity:1; transform:scaleY(1.2)} }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 7rem 6%; }
+    .section-label {
+      font-size: .72rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--terr); font-weight: 600; margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400; color: var(--dark); margin-bottom: 3.5rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: ''; display: block; width: 50px; height: 2px;
+      background: var(--terr); margin-top: .9rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: center;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: var(--cream); border-radius: 16px; padding: 1.6rem;
+      border-left: 3px solid var(--terr); transition: transform .3s, box-shadow .3s;
+    }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 600; color: var(--terr);
+    }
+    .stat-label { font-size: .8rem; color: #777; letter-spacing: .05em; margin-top: .2rem; }
+    .about-text p { font-size: .97rem; line-height: 1.9; color: #555; margin-bottom: 1.2rem; }
+    .about-langs { display: flex; gap: 1rem; margin-top: 2rem; }
+    .lang-pill {
+      padding: .45rem 1.4rem; border-radius: 50px; font-size: .8rem;
+      font-weight: 500; background: var(--cream); border: 1px solid var(--sand);
+      color: var(--charcoal); letter-spacing: .05em;
+    }
+
+    /* ─── SKILLS ─── */
+    #skills { background: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .skill-group h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 600; color: var(--dark); margin-bottom: 1.5rem;
+      padding-bottom: .7rem; border-bottom: 1px solid var(--sand);
+    }
+    .skill-item { margin-bottom: 1.2rem; }
+    .skill-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: .4rem; }
+    .skill-name { font-size: .88rem; color: var(--charcoal); font-weight: 500; }
+    .skill-bar { height: 5px; background: var(--sand); border-radius: 10px; overflow: hidden; }
+    .skill-fill {
+      height: 100%; background: linear-gradient(90deg, var(--terr), var(--gold));
+      border-radius: 10px; width: 0;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    .tag-list { display: flex; flex-wrap: wrap; gap: .7rem; }
+    .skill-tag {
+      padding: .45rem 1.1rem; border-radius: 50px; font-size: .8rem;
+      background: var(--white); border: 1px solid var(--sand); color: var(--charcoal);
+      font-weight: 500; transition: all .3s;
+    }
+    .skill-tag:hover { background: var(--terr); color: var(--white); border-color: var(--terr); }
+
+    /* ─── PROJECTS ─── */
+    #projects { background: var(--white); }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .project-card {
+      border-radius: 20px; overflow: hidden;
+      background: var(--cream); border: 1px solid var(--beige);
+      transition: transform .35s, box-shadow .35s;
+      cursor: pointer;
+    }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
+    .project-card:nth-child(1) { grid-column: span 2; }
+    .project-thumb {
+      height: 220px; background: linear-gradient(135deg, var(--beige), var(--sand));
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .project-card:nth-child(1) .project-thumb { height: 300px; }
+    .project-thumb-icon {
+      font-size: 4rem; opacity: .25;
+    }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(44,44,44,.6) 0%, transparent 60%);
+      opacity: 0; transition: opacity .35s;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
+    .project-body { padding: 1.8rem 2rem; }
+    .project-cat {
+      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--terr); font-weight: 600; margin-bottom: .5rem;
+    }
+    .project-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; font-weight: 600; color: var(--dark); margin-bottom: .6rem;
+    }
+    .project-body p { font-size: .88rem; color: #777; line-height: 1.7; }
+
+    /* ─── EXPERIENCE ─── */
+    #experience { background: var(--cream); }
+    .timeline { position: relative; padding-left: 2.5rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 2px; background: linear-gradient(to bottom, var(--terr), var(--sand));
+    }
+    .timeline-item { position: relative; margin-bottom: 3rem; }
+    .timeline-dot {
+      position: absolute; left: -2.65rem; top: 6px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--terr); border: 3px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--terr);
+    }
+    .timeline-date {
+      font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--terr); font-weight: 600; margin-bottom: .4rem;
+    }
+    .timeline-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--dark); margin-bottom: .3rem;
+    }
+    .timeline-item h4 { font-size: .9rem; color: var(--terr); font-weight: 500; margin-bottom: .8rem; }
+    .timeline-item p { font-size: .9rem; color: #666; line-height: 1.8; }
+
+    /* ─── EDUCATION ─── */
+    #education { background: var(--white); }
+    .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .edu-card {
+      background: var(--cream); border-radius: 20px; padding: 2.2rem;
+      border-top: 4px solid var(--terr); transition: transform .3s, box-shadow .3s;
+    }
+    .edu-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+    .edu-year {
+      font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--terr); font-weight: 600; margin-bottom: .6rem;
+    }
+    .edu-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 600; color: var(--dark); margin-bottom: .3rem;
+    }
+    .edu-card p { font-size: .88rem; color: #777; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--dark); }
+    #contact .section-label { color: var(--gold); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-title::after { background: var(--gold); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .contact-info p { font-size: .97rem; color: rgba(255,255,255,.65); line-height: 1.9; margin-bottom: 2.5rem; }
+    .contact-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      color: rgba(255,255,255,.8); font-size: .9rem;
+      text-decoration: none; transition: color .3s;
+    }
+    .contact-item:hover { color: var(--gold); }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background .3s, border-color .3s;
+    }
+    .contact-item:hover .contact-icon { background: rgba(201,169,110,.2); border-color: var(--gold); }
+    .contact-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: .5rem; }
+    .form-group label { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 500; }
+    .form-group input, .form-group textarea {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; padding: .9rem 1.2rem;
+      font-family: 'Jost', sans-serif; font-size: .92rem; color: var(--white);
+      outline: none; transition: border-color .3s, background .3s;
+      resize: none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--gold); background: rgba(255,255,255,.09);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .btn-gold {
+      background: var(--gold); color: var(--dark); border: 2px solid var(--gold);
+      font-weight: 700;
+    }
+    .btn-gold:hover { background: transparent; color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,169,110,.3); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #111; padding: 2rem 6%;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    footer p { font-size: .8rem; color: rgba(255,255,255,.35); }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; color: rgba(255,255,255,.5); letter-spacing: .05em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: .15s; }
+    .fade-up:nth-child(3) { transition-delay: .3s; }
+    .fade-up:nth-child(4) { transition-delay: .45s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; text-align: center; padding-top: 7rem; }
+      .hero-image { display: none; }
+      .hero-text p { max-width: 100%; }
+      .btn-group { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card:nth-child(1) { grid-column: span 1; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 1.2rem;
+        position: absolute; top: 100%; left: 0; width: 100%;
+        background: var(--cream); padding: 2rem 6%; border-top: 1px solid var(--sand);
+      }
+      .hamburger { display: flex; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
 <body>
-  <H1>Hi my name is Astha</H1>
+
+<!-- ════════ NAV ════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">AK</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-tag">Interior Designer · Dehradun, India</span>
+    <h1>Astha<br /><em>Kohli</em></h1>
+    <p>
+      Passionate about bringing spaces to life through art and functionality.
+      With expertise in design software and a love for travel, I create
+      visually stunning and practical designs — blending artistic vision with
+      technical skill to make every project uniquely captivating.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="photo-frame">
+      <div class="photo-placeholder">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        Astha Kohli
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ════════ ABOUT ════════ -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">Who I Am</p>
+      <h2 class="section-title">Crafting spaces<br />that inspire</h2>
+      <div class="about-stats">
+        <div class="stat-card fade-up">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Years of Education</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Institutional Projects</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Design Softwares</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Languages</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text fade-up">
+      <p>
+        I am an Interior Designer with a Bachelor's degree from Medhavi University,
+        Sikkim and a specialisation from INIFD, Gurugram. My design philosophy
+        centres on creating spaces that are both visually stunning and deeply functional.
+      </p>
+      <p>
+        During my internship at <strong>Finearch Studio Pvt Ltd</strong>, I contributed to
+        a diverse range of residential and commercial projects — honing my ability to
+        translate concepts into compelling spatial experiences.
+      </p>
+      <p>
+        Whether it's a cozy studio apartment or a vibrant restaurant, I approach every
+        brief with curiosity, precision, and a passion for detail.
+      </p>
+      <div class="about-langs">
+        <span class="lang-pill">English</span>
+        <span class="lang-pill">Hindi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ SKILLS ════════ -->
+<section id="skills">
+  <p class="section-label">What I Bring</p>
+  <h2 class="section-title">Skills &amp; Tools</h2>
+  <div class="skills-grid">
+
+    <!-- Software -->
+    <div class="skill-group fade-up">
+      <h3>Software Proficiency</h3>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">AutoCAD</span><span style="font-size:.78rem;color:var(--terr)">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">SketchUp</span><span style="font-size:.78rem;color:var(--terr)">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">V-Ray</span><span style="font-size:.78rem;color:var(--terr)">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Adobe Photoshop</span><span style="font-size:.78rem;color:var(--terr)">Working</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="45%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Microsoft PowerPoint</span><span style="font-size:.78rem;color:var(--terr)">Working</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="45%"></div></div>
+      </div>
+    </div>
+
+    <!-- Professional -->
+    <div class="skill-group fade-up">
+      <h3>Professional Skills</h3>
+      <div class="tag-list">
+        <span class="skill-tag">Concept Development</span>
+        <span class="skill-tag">Ideation</span>
+        <span class="skill-tag">Space Planning</span>
+        <span class="skill-tag">Team Work</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Presentation Skills</span>
+      </div>
+    </div>
+
+    <!-- Creative -->
+    <div class="skill-group fade-up">
+      <h3>Creative Skills</h3>
+      <div class="tag-list">
+        <span class="skill-tag">Photography</span>
+        <span class="skill-tag">Sketching</span>
+        <span class="skill-tag">Mood Boarding</span>
+        <span class="skill-tag">Colour Theory</span>
+        <span class="skill-tag">Material Selection</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ PROJECTS ════════ -->
+<section id="projects">
+  <p class="section-label">My Work</p>
+  <h2 class="section-title">Institutional Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-up">
+      <div class="project-thumb">
+        <div class="project-thumb-icon">🏠</div>
+        <div class="project-overlay"></div>
+      </div>
+      <div class="project-body">
+        <p class="project-cat">Residential</p>
+        <h3>Studio Apartment Design</h3>
+        <p>A thoughtfully designed compact living space that maximises functionality without compromising on aesthetics. Every element serves a purpose while contributing to a warm, cohesive atmosphere.</p>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-thumb">
+        <div class="project-thumb-icon">🏡</div>
+        <div class="project-overlay"></div>
+      </div>
+      <div class="project-body">
+        <p class="project-cat">Residential</p>
+        <h3>Duplex Interior Design — 3BHK</h3>
+        <p>A multi-level residence where spatial flow, material palette, and lighting work in harmony to create an elevated living experience across two floors.</p>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-thumb">
+        <div class="project-thumb-icon">💼</div>
+        <div class="project-overlay"></div>
+      </div>
+      <div class="project-body">
+        <p class="project-cat">Commercial</p>
+        <h3>Workspace Design — Advertisement Office</h3>
+        <p>A dynamic and creative office environment designed to inspire collaboration and productivity, reflecting the vibrant energy of an advertising agency.</p>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-thumb">
+        <div class="project-thumb-icon">🍽️</div>
+        <div class="project-overlay"></div>
+      </div>
+      <div class="project-body">
+        <p class="project-cat">Hospitality</p>
+        <h3>Hospitality — Restaurant</h3>
+        <p>An immersive dining experience shaped through carefully curated ambiance, material choices, and lighting that complement the culinary vision of the space.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ EXPERIENCE ════════ -->
+<section id="experience">
+  <p class="section-label">Career Journey</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <p class="timeline-date">Nov 2023 — Jan 2024</p>
+      <h3>Interior Design Intern</h3>
+      <h4>Finearch Studio Pvt Ltd</h4>
+      <p>
+        Accumulated valuable hands-on experience contributing to a diverse portfolio of
+        residential and commercial projects. Collaborated with the design team on concept
+        development, space planning, and client presentations — strengthening both
+        technical skills and professional communication abilities.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ EDUCATION ════════ -->
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card fade-up">
+      <p class="edu-year">2021 — 2024</p>
+      <h3>Bachelor of Interior Design</h3>
+      <p>Medhavi University, Sikkim</p>
+    </div>
+    <div class="edu-card fade-up">
+      <p class="edu-year">2021 — 2024</p>
+      <h3>3-Year Specialisation in Interior Design</h3>
+      <p>INIFD, Gurugram</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p class="section-label">Let's Connect</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <p>
+        I'm always open to exciting design opportunities, collaborations, and
+        conversations about space and creativity. Feel free to reach out!
+      </p>
+      <div class="contact-list">
+        <a href="tel:+916398568668" class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.94a16 16 0 0 0 6.15 6.15l.95-.94a2 2 0 0 1 2.11-.45c.908.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          +91 63985 68668
+        </a>
+        <a href="mailto:asthakohli.id@gmail.com" class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          asthakohli.id@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/astha-kohli-366909233" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </span>
+          linkedin.com/in/astha-kohli-366909233
+        </a>
+        <span class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          Prerna Sadan, Raksha Vihar, Dehradun — 248001
+        </span>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="handleForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Project enquiry" />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about your project…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <span class="footer-logo">Astha Kohli</span>
+  <p>© 2024 Astha Kohli · Interior Designer · Dehradun, India</p>
+</footer>
+
+<!-- ════════ SCRIPTS ════════ -->
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  }));
+
+  // Intersection Observer for fade-up + skill bars
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate skill bars inside
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width;
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+
+  document.querySelectorAll('.fade-up, .skill-group').forEach(el => observer.observe(el));
+
+  // Skill bars in view separately
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width;
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-group').forEach(el => barObserver.observe(el));
+
+  // Contact form
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#4caf7d';
+    btn.style.borderColor = '#4caf7d';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
 </body>
 </html>
